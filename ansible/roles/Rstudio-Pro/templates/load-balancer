@@ -1,0 +1,9 @@
+[config]
+
+balancer = system-load
+
+[nodes]
+
+{% for host in groups['nodes'] %}
+{{ host }}
+{% endfor %}

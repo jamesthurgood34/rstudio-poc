@@ -1,0 +1,12 @@
+---
+# tasks file for R-base
+
+- name: Ensure EPEL repositories installed
+  yum:
+    name: epel-release
+    state: latest
+
+- name: Ensure R-base installed
+  yum:
+    name: R-3.6.0-1.el7
+    state: present

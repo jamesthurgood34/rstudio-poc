@@ -1,0 +1,6 @@
+---
+# tasks file for git
+- name: Ensure git is installed (RedHat)
+  yum:
+    name: git
+    state: latest

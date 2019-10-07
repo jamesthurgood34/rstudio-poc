@@ -1,0 +1,23 @@
+---
+# tasks file for Rstudio
+- name: Ensure Rstudio Server is installed
+  yum:
+    name: https://download2.rstudio.org/server/centos6/x86_64/rstudio-server-rhel-pro-1.2.5001-3-x86_64.rpm
+    state: present
+
+- name: Deploy config for load balancing
+  template:
+    src: load-balancer
+    dest: /etc/rstudio/load-balancer
+
+- name: Deploy cookie for load balancing
+  template:
+    mode: '0600'
+    src: secure-cookie-key
+    dest: /etc/rstudio/secure-cookie-key
+
+- name: Retsart Rstudio
+  service:
+    name: rstudio-server
+    state: restarted
+

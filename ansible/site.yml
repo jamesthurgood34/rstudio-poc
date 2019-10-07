@@ -1,1 +1,12 @@
--
+---
+
+- name: Setup Rstudio Server Pro
+  hosts: nodes
+  remote_user: james
+  become: yes
+  roles:
+    - create_test_user
+    - git
+    - R-base
+    - Rstudio-Pro
+
