@@ -2,3 +2,5 @@
 [nodes]
 rst[01:03]
 
+[controller_host]
+controller

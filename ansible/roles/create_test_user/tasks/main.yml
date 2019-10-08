@@ -1,5 +1,6 @@
 ---
 # tasks file for create_test_user
+
 - name: Creating users test user without admin access
   user:
     name: test
@@ -7,3 +8,13 @@
     state: present
     shell: /bin/bash 
     createhome: yes 
+    home: /mnt/homes/test
+
+- name: Creating users test2 user without admin access
+  user:
+    name: test2
+    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    state: present
+    shell: /bin/bash 
+    createhome: yes 
+    home: /mnt/homes/test2

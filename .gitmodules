@@ -1,0 +1,3 @@
+[submodule "openldap_server"]
+	path = openldap_server
+	url = https://github.com/bennojoy/openldap_server.git

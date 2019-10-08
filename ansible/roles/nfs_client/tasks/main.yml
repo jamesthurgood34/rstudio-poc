@@ -1,0 +1,14 @@
+---
+# tasks file for nfs_client
+- name: Ensure nfs client tools installed
+  yum:
+    name: nfs-utils
+    state: present
+
+- name: mount nfs share
+  mount:
+    fstype: nfs
+    path: /mnt/homes 
+    src: controller:/srv/homes
+    opts: rw,sync
+    state: mounted
