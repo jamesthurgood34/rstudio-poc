@@ -1,0 +1,5 @@
+# User home mount - This is REQUIRED for the session to run
+Host: controller
+Path: /mnt/homes/{USER}
+MountPath: /mnt/homes/{USER}
+ReadOnly: false

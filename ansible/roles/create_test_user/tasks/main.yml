@@ -1,5 +1,17 @@
 ---
 # tasks file for create_test_user
+- name: Ensure group "rstudio-admins" exists
+  group:
+    name: rstudio-admins
+    state: present
+
+- name: Ensure group "rstudio-superuser-admins" exists
+  group:
+    name: rstudio-superuser-admins
+    state: present
+
+    
+
 
 - name: Creating users test user without admin access
   user:
@@ -8,7 +20,7 @@
     state: present
     shell: /bin/bash 
     createhome: yes 
-    home: /mnt/homes/test
+    home: /home/test
 
 - name: Creating users test2 user without admin access
   user:
@@ -17,4 +29,14 @@
     state: present
     shell: /bin/bash 
     createhome: yes 
-    home: /mnt/homes/test2
+    home: /home/test2
+
+- name: Creating admin user
+  user:
+    name: admin
+    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    state: present
+    groups: rstudio-admins,rstudio-superuser-admins
+    shell: /bin/bash 
+    createhome: yes 
+    home: /home/admin

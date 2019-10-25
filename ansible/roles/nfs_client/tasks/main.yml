@@ -8,7 +8,7 @@
 - name: mount nfs share
   mount:
     fstype: nfs
-    path: /mnt/homes 
+    path: /mnt/homes
     src: controller:/srv/homes
     opts: rw,sync
     state: mounted

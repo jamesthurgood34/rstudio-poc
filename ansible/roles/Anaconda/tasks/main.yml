@@ -1,0 +1,22 @@
+---
+# tasks file for Anaconda
+
+
+- name: Check if anaconda already installed
+  stat:
+    path: /usr/share/Anaconda3
+  register: install_dir
+
+- name: Download Anaconda installer shell script
+  get_url:
+    url: https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh
+    dest: /tmp/Anaconda3-2019.sh
+    mode: '770'
+  when: install_dir.stat.exists == False
+
+- name: Run a Anaconda install script 
+  shell: /tmp/Anaconda3-2019.sh -b -u -p /usr/share/Anaconda3
+  when: install_dir.stat.exists == False
+
+
+  

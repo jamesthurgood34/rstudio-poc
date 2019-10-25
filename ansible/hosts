@@ -1,6 +1,7 @@
 
 [nodes]
-rst[01:03]
+#rst[01:02]
+rst01
 
 [controller_host]
 controller
