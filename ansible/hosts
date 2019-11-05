@@ -3,5 +3,8 @@
 #rst[01:02]
 rst01
 
-[controller_host]
-controller
+[nfs_cluster]
+nfs[01:02]
+
+[nfs-cluster-lead]
+nfs01

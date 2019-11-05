@@ -1,22 +1,22 @@
 ---
 
 - name: Setup of NFS Server
-  hosts: controller_host  
+  hosts: nfs_cluster  
   remote_user: james
   become: yes
   roles:
-    - ansible-role-nfs-master
+      - nfs_cluster
 
 
-- name: Setup Rstudio Server Pro
-  hosts: nodes
-  remote_user: james
-  become: yes
-  roles:
-    - Anaconda
-    - nfs_client
-    - create_test_user
-    - git
-    - R-base
-    - Rstudio-Pro
+#- name: Setup Rstudio Server Pro
+#  hosts: nodes
+#  remote_user: james
+#  become: yes
+#  roles:
+#    - Anaconda
+#    - nfs_client
+#    - create_test_user
+#    - git
+#    - R-base
+#    - Rstudio-Pro
 

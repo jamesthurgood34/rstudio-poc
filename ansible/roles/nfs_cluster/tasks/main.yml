@@ -1,0 +1,49 @@
+---
+# tasks file for nfs-cluster
+- name: update /etc/hosts file
+  blockinfile:
+    dest: /etc/hosts
+    content: "{{ lookup('template', 'hosts.j2') }}"
+    state: present
+
+- name: yum update
+  vars:
+    packages:
+      - pcs
+      - fence-agents-all
+  yum:
+    name : "{{ packages }}"
+
+- name: Add high-avaliabilty to firewall
+  firewalld:
+    service: high-availability
+    state: enabled
+    permanent: yes
+
+- name: Reload firewalld
+  service:
+    name: firewalld
+    state: reloaded
+
+- name: enable and start pcsd
+  service:
+    name: pcsd
+    state: started
+    enabled: yes
+
+- name: Creating hacluster user
+  user:
+    name: hacluster
+    password: "{{ hacluster_pass | password_hash('sha512', 'mysecretsalt') }}"
+    state: present
+    shell: /bin/bash
+
+- name: Creating hacluster 
+  debug:
+    msg: "{{ hacluster_pass }}"
+
+- name: Authenticate against other hosts
+  command: pcs cluster auth {{ groups['nfs_cluster'] | join(' ')}} -u hacluster -p {{ hacluster_pass }}
+  when: inventory_hostname in groups['nfs-cluster-lead']
+  no_log: true
+  
